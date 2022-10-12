@@ -2,6 +2,12 @@
 # reserved. Use of this source code is governed by a BSD-style license that
 # can be found in the LICENSE file.
 
+# Redirect CMAKE_CURRENT_BINDARY_DIR
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/cef_client")
+set(CMAKE_LIBARARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/cef_client")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/cef_client")
+
+
 #
 # Source files.
 #
@@ -389,7 +395,10 @@ else()
 endif()
 
 # Determine the target output directory.
-SET_CEF_TARGET_OUT_DIR()
+# SET_CEF_TARGET_OUT_DIR()
+# Do not use CEF predefined macros 
+set(CEF_TARGET_OUT_DIR "${CMAKE_BINARY_DIR}/cef_client")
+message(STATUS "CEF_TARGET_OUT_DIR: ${CEF_TARGET_OUT_DIR}")
 
 
 #
@@ -596,7 +605,16 @@ if(OS_WINDOWS)
   endif()
 
   # Add the custom manifest files to the executable.
-  ADD_WINDOWS_MANIFEST("${CMAKE_CURRENT_SOURCE_DIR}/resources/win" "${CEF_TARGET}" "exe")
+  # ADD_WINDOWS_MANIFEST("${CMAKE_CURRENT_SOURCE_DIR}/resources/win" "${CEF_TARGET}" "exe")
+  # Do not use CEF predefined macros
+  add_custom_command(
+    TARGET ${CEF_TARGET}
+    POST_BUILD
+    COMMAND "mt.exe" -nologo
+            -manifest \"${CMAKE_CURRENT_SOURCE_DIR}/resources/win/${CEF_TARGET}.exe.manifest\" \"${CMAKE_CURRENT_SOURCE_DIR}/resources/win/compatibility.manifest\"
+            -outputresource:"${CEF_TARGET_OUT_DIR}/${CEF_TARGET}.exe"\;\#1
+    COMMENT "Adding manifest..."
+    )
 
   # Copy CEF binary and resource files to the target output directory.
   COPY_FILES("${CEF_TARGET}" "${CEF_BINARY_FILES}" "${CEF_BINARY_DIR}" "${CEF_TARGET_OUT_DIR}")

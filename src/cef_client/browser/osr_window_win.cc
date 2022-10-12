@@ -1180,6 +1180,7 @@ void OsrWindowWin::EnsureRenderHandler() {
                                      client_rect_.right - client_rect_.left,
                                      client_rect_.bottom - client_rect_.top)) {
         render_handler_.reset(render_handler);
+        LOG(INFO) << "Created D3D11 renderer.\n";
       } else {
         LOG(ERROR) << "Failed to initialize D3D11 rendering.";
         delete render_handler;
@@ -1191,6 +1192,7 @@ void OsrWindowWin::EnsureRenderHandler() {
       auto render_handler = new OsrRenderHandlerWinGL(settings_, hwnd_);
       render_handler->Initialize(browser_);
       render_handler_.reset(render_handler);
+      LOG(INFO) << "Created OpenGL renderer.\n";
     }
   }
 }

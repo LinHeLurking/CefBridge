@@ -103,6 +103,9 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
   window_config->with_osr =
       settings.windowless_rendering_enabled ? true : false;
 
+  // Set |initially_hidden| to hide the window.
+  // window_config->initially_hidden = true;
+
   // Create the first window.
   context->GetRootWindowManager()->CreateRootWindow(std::move(window_config));
 
@@ -120,8 +123,8 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
   return result;
 }
 
-}  // namespace
-}  // namespace client
+} // namespace
+} // namespace client
 
 // Program entry point function.
 int APIENTRY wWinMain(HINSTANCE hInstance,
