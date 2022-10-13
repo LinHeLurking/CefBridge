@@ -5,11 +5,9 @@
 
 namespace shared_memory {
 
-template <class KeyT>
-ShmManager<KeyT>::ShmManager() {}
+ShmManager::ShmManager() {}
 
-template <class KeyT>
-std::shared_ptr<ShmObj> ShmManager<KeyT>::GetShm(KeyT const &key) {
+std::shared_ptr<ShmObj> ShmManager::GetShm(int const &key) {
   if (chunks_.count(key)) {
     return chunks_[key];
   } else {
@@ -17,8 +15,7 @@ std::shared_ptr<ShmObj> ShmManager<KeyT>::GetShm(KeyT const &key) {
   }
 }
 
-template <class KeyT>
-std::shared_ptr<ShmObj> ShmManager<KeyT>::GetOrCreateShm(KeyT const &key,
+std::shared_ptr<ShmObj> ShmManager::GetOrCreateShm(int const &key,
                                                          size_t size) {
   if (chunks_.count(key)) {
     return chunks_[key];

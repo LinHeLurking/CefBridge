@@ -586,7 +586,6 @@ if(OS_WINDOWS)
     ${CEFCLIENT_RESOURCES_SRCS}
     ${CEFCLIENT_WINDOWS_SRCS}
     ${shared_memory_src}
-    ${utility_src}
     )
 
   # Executable target.

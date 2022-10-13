@@ -12,15 +12,14 @@
 
 
 namespace shared_memory {
-template<class KeyT>
 class ShmManager {
  public:
   ShmManager();
-  std::shared_ptr<ShmObj> GetOrCreateShm(KeyT const &key, size_t size);
-  std::shared_ptr<ShmObj> GetShm(KeyT const &key);
+  std::shared_ptr<ShmObj> GetOrCreateShm(int const &key, size_t size);
+  std::shared_ptr<ShmObj> GetShm(int const &key);
 
  private:
-  std::unordered_map<KeyT, std::shared_ptr<ShmObj>> chunks_;
+  std::unordered_map<int, std::shared_ptr<ShmObj>> chunks_;
 };
 }  // namespace shared_memory
 

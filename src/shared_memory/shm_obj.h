@@ -15,10 +15,10 @@ class ShmObj {
     /**
      * @brief Get the key of shared memory.
      *
-     * @return std::string
+     * @return int
      */
 
-    virtual std::string GetKey() const = 0;
+    virtual int GetKey() const = 0;
     /**
      * @brief Get the read/write buffer of shared memory
      *
@@ -34,10 +34,10 @@ class ShmObj {
     virtual size_t GetSize() const = 0;
     virtual ~Delegate() {}
   };
-  ShmObj(std::string const &key, size_t size);
+  ShmObj(int key, size_t size);
   virtual ~ShmObj(){};
 
-  std::string GetKey() const { return shm_obj_d_->GetKey(); }
+  int GetKey() const { return shm_obj_d_->GetKey(); }
   size_t GetSize() const { return shm_obj_d_->GetSize(); }
   int8_t *GetBuf() const { return shm_obj_d_->GetBuf(); }
 

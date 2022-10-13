@@ -12,9 +12,10 @@
 #include <string>
 
 namespace shared_memory {
-ShmObjWin::ShmObjWin(const std::string& key, size_t size) {
+ShmObjWin::ShmObjWin(int key, size_t size) {
   char sz_name[256];
-  strncpy_s(sz_name, key.c_str(), key.size());
+  std::string key_str = "Shared Chunk("+std::to_string(key)+")";
+  strncpy_s(sz_name, key_str.c_str(), key_str.size());
   h_map_file_ =
       CreateFileMappingA(INVALID_HANDLE_VALUE,  // use paging file
                          nullptr,               // default security
@@ -29,7 +30,7 @@ ShmObjWin::ShmObjWin(const std::string& key, size_t size) {
   size_ = size;
 }
 
-std::string ShmObjWin::GetKey() const { return key_; }
+int ShmObjWin::GetKey() const { return key_; }
 
 size_t ShmObjWin::GetSize() const { return size_; }
 

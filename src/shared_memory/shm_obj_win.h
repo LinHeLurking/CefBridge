@@ -12,8 +12,8 @@
 namespace shared_memory {
 class ShmObjWin : public ShmObj::Delegate {
  public:
-  ShmObjWin(const std::string &key, size_t size);
-  std::string GetKey() const override;
+  ShmObjWin(int key, size_t size);
+  int GetKey() const override;
   int8_t *GetBuf() const override;
   size_t GetSize() const override;
 
@@ -21,7 +21,7 @@ class ShmObjWin : public ShmObj::Delegate {
 
  private:
   size_t size_;
-  std::string key_;
+  int key_;
   HANDLE h_map_file_;
 };
 }  // namespace shared_memory

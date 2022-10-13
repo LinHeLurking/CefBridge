@@ -48,7 +48,7 @@ OsrRenderHandlerWinGL::OsrRenderHandlerWinGL(
       hdc_(nullptr),
       hrc_(nullptr),
       painting_popup_(false),
-      shm_mgr_(new ::shared_memory::ShmManager<int>) {}
+      shm_mgr_(new ::shared_memory::ShmManager) {}
 
 void OsrRenderHandlerWinGL::Initialize(CefRefPtr<CefBrowser> browser) {
   CEF_REQUIRE_UI_THREAD();

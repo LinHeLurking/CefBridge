@@ -47,7 +47,7 @@ class OsrRenderHandlerWinGL : public OsrRenderHandlerWin {
   HDC hdc_;
   HGLRC hrc_;
   bool painting_popup_;
-  std::unique_ptr<shared_memory::ShmManager<int>> shm_mgr_;
+  std::unique_ptr<shared_memory::ShmManager> shm_mgr_;
 
   DISALLOW_COPY_AND_ASSIGN(OsrRenderHandlerWinGL);
 };
