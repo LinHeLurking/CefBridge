@@ -8,12 +8,12 @@ project ("CefBridge")
 # Globally set C++ standard to C++17
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable (cef_bridge 
+add_executable (cef_launcher 
 "src/main.cc"
-"src/cef_bridge/cef_bridge.h"
-"src/cef_bridge/cef_bridge.cc" 
-"src/cef_bridge/cef_bridge_win.h"
-"src/cef_bridge/cef_bridge_win.cc"
+"src/cef_launcher/launcher.h"
+"src/cef_launcher/launcher.cc" 
+"src/cef_launcher/launcher_win.h"
+"src/cef_launcher/launcher_win.cc"
 )
 
 set(shared_memory_src 
@@ -51,7 +51,7 @@ add_subdirectory(${CEF_LIBCEF_DLL_WRAPPER_PATH} libcef_dll_wrapper)
 
 add_subdirectory(src/cef_client)
 
-add_dependencies(cef_bridge cefclient)
+add_dependencies(cef_launcher cefclient)
 
 # Display configuration settings.
 # PRINT_CEF_CONFIG()

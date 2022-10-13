@@ -4,7 +4,7 @@
 #include <memory>
 
 namespace cef_bridge {
-class CefBridge {
+class CefLauncher {
  public:
   class Delegate {
    public:
@@ -13,8 +13,8 @@ class CefBridge {
     virtual ~Delegate() = default;
   };
 
-  CefBridge();
-  ~CefBridge();
+  CefLauncher();
+  ~CefLauncher();
 
   [[nodiscard]] int Launch() const { return bridge_d_->Launch(); }
 

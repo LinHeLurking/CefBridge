@@ -1,4 +1,4 @@
-#include "cef_bridge_win.h"
+#include "launcher_win.h"
 
 #include <filesystem>
 #include <iostream>
@@ -6,7 +6,7 @@
 size_t constexpr MAX_NAME_LEN = 512;
 
 namespace cef_bridge {
-int CefBridgeWin::Launch() {
+int CefLauncherWin::Launch() {
   auto target_path_str = SearchCefClient();
   // Add argument
   target_path_str += L" --off-screen-rendering-enabled";
@@ -41,7 +41,7 @@ int CefBridgeWin::Launch() {
   return 0;
 }
 
-std::wstring CefBridgeWin::SearchCefClient() {
+std::wstring CefLauncherWin::SearchCefClient() {
   TCHAR self_path_c_str[MAX_NAME_LEN];
   GetModuleFileName(nullptr, self_path_c_str, MAX_NAME_LEN);
 

@@ -5,12 +5,12 @@
 
 #include <string>
 
-#include "cef_bridge.h"
+#include "launcher.h"
 
 #pragma comment(lib, "user32.lib")
 
 namespace cef_bridge {
-class CefBridgeWin final : public CefBridge::Delegate {
+class CefLauncherWin final : public CefLauncher::Delegate {
  public:
   int Launch() override;
   static std::wstring SearchCefClient();

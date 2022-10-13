@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "cef_bridge/cef_bridge.h"
+#include "cef_launcher/launcher.h"
 
 
 int main() {
-  cef_bridge::CefBridge const bridge;
+  cef_bridge::CefLauncher const bridge;
   return bridge.Launch();
 }

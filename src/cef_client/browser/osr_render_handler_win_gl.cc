@@ -115,7 +115,7 @@ void OsrRenderHandlerWinGL::OnPaint(
   CEF_REQUIRE_UI_THREAD();
 
   int key = browser->GetIdentifier();
-  int size = width * height;
+  int size = width * height * 4;
   auto shm = shm_mgr_->GetOrCreateShm(key, size);
   int8_t* shm_buf = shm->GetBuf();
   memcpy(shm_buf, buffer, size);
