@@ -6,8 +6,9 @@
 #define CEF_TESTS_CEFCLIENT_BROWSER_OSR_RENDER_HANDLER_WIN_GL_H_
 #pragma once
 
-#include "tests/cefclient/browser/osr_render_handler_win.h"
-#include "tests/cefclient/browser/osr_renderer.h"
+#include "../../shared_memory/shm_manager.h"
+#include "osr_render_handler_win.h"
+#include "osr_renderer.h"
 
 namespace client {
 
@@ -28,10 +29,8 @@ class OsrRenderHandlerWinGL : public OsrRenderHandlerWin {
   void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) override;
   void OnPaint(CefRefPtr<CefBrowser> browser,
                CefRenderHandler::PaintElementType type,
-               const CefRenderHandler::RectList& dirtyRects,
-               const void* buffer,
-               int width,
-               int height) override;
+               const CefRenderHandler::RectList& dirtyRects, const void* buffer,
+               int width, int height) override;
   void OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                           CefRenderHandler::PaintElementType type,
                           const CefRenderHandler::RectList& dirtyRects,
@@ -48,6 +47,7 @@ class OsrRenderHandlerWinGL : public OsrRenderHandlerWin {
   HDC hdc_;
   HGLRC hrc_;
   bool painting_popup_;
+  std::unique_ptr<shared_memory::ShmManager<int>> shm_mgr_;
 
   DISALLOW_COPY_AND_ASSIGN(OsrRenderHandlerWinGL);
 };

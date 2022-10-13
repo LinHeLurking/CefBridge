@@ -2,7 +2,7 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "tests/cefclient/browser/views_window.h"
+#include "views_window.h"
 
 #include <algorithm>
 
@@ -12,11 +12,11 @@
 #include "include/cef_i18n_util.h"
 #include "include/views/cef_box_layout.h"
 #include "include/wrapper/cef_helpers.h"
-#include "tests/cefclient/browser/main_context.h"
-#include "tests/cefclient/browser/resource.h"
-#include "tests/cefclient/browser/views_style.h"
-#include "tests/shared/browser/extension_util.h"
-#include "tests/shared/common/client_switches.h"
+#include "main_context.h"
+#include "resource.h"
+#include "views_style.h"
+#include "extension_util.h"
+#include "../common/client_switches.h"
 
 #if !defined(OS_WIN)
 #define VK_ESCAPE 0x1B

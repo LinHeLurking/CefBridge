@@ -2,10 +2,10 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "tests/cefclient/renderer/client_renderer.h"
-#include "tests/cefclient/renderer/ipc_performance_test.h"
-#include "tests/cefclient/renderer/performance_test.h"
-#include "tests/shared/renderer/client_app_renderer.h"
+#include "client_renderer.h"
+#include "ipc_performance_test.h"
+#include "performance_test.h"
+#include "client_app_renderer.h"
 
 namespace client {
 

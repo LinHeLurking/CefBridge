@@ -2,7 +2,7 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "tests/cefclient/browser/client_handler.h"
+#include "client_handler.h"
 
 #include <stdio.h>
 #include <algorithm>
@@ -19,14 +19,14 @@
 #include "include/cef_ssl_status.h"
 #include "include/cef_x509_certificate.h"
 #include "include/wrapper/cef_closure_task.h"
-#include "tests/cefclient/browser/main_context.h"
-#include "tests/cefclient/browser/root_window_manager.h"
-#include "tests/cefclient/browser/test_runner.h"
-#include "tests/shared/browser/extension_util.h"
-#include "tests/shared/browser/resource_util.h"
-#include "tests/shared/common/binary_value_utils.h"
-#include "tests/shared/common/client_switches.h"
-#include "tests/shared/common/string_util.h"
+#include "main_context.h"
+#include "root_window_manager.h"
+#include "test_runner.h"
+#include "extension_util.h"
+#include "resource_util.h"
+#include "../common/binary_value_utils.h"
+#include "../common/client_switches.h"
+#include "../common/string_util.h"
 
 namespace client {
 

@@ -2,12 +2,12 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "tests/cefclient/browser/root_window.h"
+#include "root_window.h"
 
 #include "include/base/cef_callback_helpers.h"
 
-#include "tests/cefclient/browser/main_context.h"
-#include "tests/cefclient/browser/root_window_manager.h"
+#include "main_context.h"
+#include "root_window_manager.h"
 
 namespace client {
 

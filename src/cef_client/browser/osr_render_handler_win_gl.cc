@@ -2,12 +2,16 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "tests/cefclient/browser/osr_render_handler_win_gl.h"
+#include "osr_render_handler_win_gl.h"
 
+#include <stdint.h>
+#include <vcruntime_string.h>
+
+#include "../../shared_memory/shm_manager.h"
 #include "include/base/cef_callback.h"
 #include "include/wrapper/cef_closure_task.h"
 #include "include/wrapper/cef_helpers.h"
-#include "tests/shared/browser/util_win.h"
+#include "util_win.h"
 
 namespace client {
 
@@ -38,13 +42,13 @@ class ScopedGLContext {
 }  // namespace
 
 OsrRenderHandlerWinGL::OsrRenderHandlerWinGL(
-    const OsrRendererSettings& settings,
-    HWND hwnd)
+    const OsrRendererSettings& settings, HWND hwnd)
     : OsrRenderHandlerWin(settings, hwnd),
       renderer_(settings),
       hdc_(nullptr),
       hrc_(nullptr),
-      painting_popup_(false) {}
+      painting_popup_(false),
+      shm_mgr_(new ::shared_memory::ShmManager<int>) {}
 
 void OsrRenderHandlerWinGL::Initialize(CefRefPtr<CefBrowser> browser) {
   CEF_REQUIRE_UI_THREAD();
@@ -105,13 +109,16 @@ void OsrRenderHandlerWinGL::OnPopupSize(CefRefPtr<CefBrowser> browser,
 }
 
 void OsrRenderHandlerWinGL::OnPaint(
-    CefRefPtr<CefBrowser> browser,
-    CefRenderHandler::PaintElementType type,
-    const CefRenderHandler::RectList& dirtyRects,
-    const void* buffer,
-    int width,
+    CefRefPtr<CefBrowser> browser, CefRenderHandler::PaintElementType type,
+    const CefRenderHandler::RectList& dirtyRects, const void* buffer, int width,
     int height) {
   CEF_REQUIRE_UI_THREAD();
+
+  int key = browser->GetIdentifier();
+  int size = width * height;
+  auto shm = shm_mgr_->GetOrCreateShm(key, size);
+  int8_t* shm_buf = shm->GetBuf();
+  memcpy(shm_buf, buffer, size);
 
   if (painting_popup_) {
     renderer_.OnPaint(browser, type, dirtyRects, buffer, width, height);
@@ -132,10 +139,8 @@ void OsrRenderHandlerWinGL::OnPaint(
 }
 
 void OsrRenderHandlerWinGL::OnAcceleratedPaint(
-    CefRefPtr<CefBrowser> browser,
-    CefRenderHandler::PaintElementType type,
-    const CefRenderHandler::RectList& dirtyRects,
-    void* share_handle) {
+    CefRefPtr<CefBrowser> browser, CefRenderHandler::PaintElementType type,
+    const CefRenderHandler::RectList& dirtyRects, void* share_handle) {
   // Not used with this implementation.
   NOTREACHED();
 }

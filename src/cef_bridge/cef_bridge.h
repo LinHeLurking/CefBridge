@@ -16,10 +16,10 @@ class CefBridge {
   CefBridge();
   ~CefBridge();
 
-  [[nodiscard]] int Launch() const { return bridge_delegate_->Launch(); }
+  [[nodiscard]] int Launch() const { return bridge_d_->Launch(); }
 
  private:
-  std::unique_ptr<Delegate> bridge_delegate_;
+  std::unique_ptr<Delegate> bridge_d_;
 };
 }  // namespace cef_bridge
 #endif  // !CEF_BRIDGE_CEF_LAUNCHER_LAUNCHER_H

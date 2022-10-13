@@ -2,23 +2,23 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "tests/cefclient/browser/root_window_win.h"
+#include "root_window_win.h"
 
 #include <shellscalingapi.h>
 
 #include "include/base/cef_build.h"
 #include "include/base/cef_callback.h"
 #include "include/cef_app.h"
-#include "tests/cefclient/browser/browser_window_osr_win.h"
-#include "tests/cefclient/browser/browser_window_std_win.h"
-#include "tests/cefclient/browser/main_context.h"
-#include "tests/cefclient/browser/resource.h"
-#include "tests/cefclient/browser/temp_window.h"
-#include "tests/cefclient/browser/window_test_runner_win.h"
-#include "tests/shared/browser/geometry_util.h"
-#include "tests/shared/browser/main_message_loop.h"
-#include "tests/shared/browser/util_win.h"
-#include "tests/shared/common/client_switches.h"
+#include "browser_window_osr_win.h"
+#include "browser_window_std_win.h"
+#include "main_context.h"
+#include "resource.h"
+#include "temp_window.h"
+#include "window_test_runner_win.h"
+#include "geometry_util.h"
+#include "main_message_loop.h"
+#include "util_win.h"
+#include "../common/client_switches.h"
 
 #define MAX_URL_LENGTH 255
 #define BUTTON_WIDTH 72

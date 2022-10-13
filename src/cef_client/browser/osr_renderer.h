@@ -6,9 +6,11 @@
 #define CEF_TESTS_CEFCLIENT_BROWSER_OSR_RENDERER_H_
 #pragma once
 
+#include <memory>
+
 #include "include/cef_browser.h"
 #include "include/cef_render_handler.h"
-#include "tests/cefclient/browser/osr_renderer_settings.h"
+#include "osr_renderer_settings.h"
 
 namespace client {
 
@@ -32,10 +34,8 @@ class OsrRenderer {
   void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect);
   void OnPaint(CefRefPtr<CefBrowser> browser,
                CefRenderHandler::PaintElementType type,
-               const CefRenderHandler::RectList& dirtyRects,
-               const void* buffer,
-               int width,
-               int height);
+               const CefRenderHandler::RectList& dirtyRects, const void* buffer,
+               int width, int height);
 
   // Apply spin.
   void SetSpin(float spinX, float spinY);

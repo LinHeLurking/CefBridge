@@ -8,16 +8,16 @@
 
 #include "include/cef_command_line.h"
 #include "include/cef_sandbox_win.h"
-#include "tests/cefclient/browser/main_context_impl.h"
-#include "tests/cefclient/browser/main_message_loop_multithreaded_win.h"
-#include "tests/cefclient/browser/root_window_manager.h"
-#include "tests/cefclient/browser/test_runner.h"
-#include "tests/shared/browser/client_app_browser.h"
-#include "tests/shared/browser/main_message_loop_external_pump.h"
-#include "tests/shared/browser/main_message_loop_std.h"
-#include "tests/shared/common/client_app_other.h"
-#include "tests/shared/common/client_switches.h"
-#include "tests/shared/renderer/client_app_renderer.h"
+#include "browser/main_context_impl.h"
+#include "browser/main_message_loop_multithreaded_win.h"
+#include "browser/root_window_manager.h"
+#include "browser/test_runner.h"
+#include "browser/client_app_browser.h"
+#include "browser/main_message_loop_external_pump.h"
+#include "browser/main_message_loop_std.h"
+#include "common/client_app_other.h"
+#include "common/client_switches.h"
+#include "renderer/client_app_renderer.h"
 
 // When generating projects with CMake the CEF_USE_SANDBOX value will be defined
 // automatically if using the required compiler version. Pass -DUSE_SANDBOX=OFF

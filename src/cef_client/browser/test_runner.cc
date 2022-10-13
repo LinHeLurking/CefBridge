@@ -2,7 +2,7 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "tests/cefclient/browser/test_runner.h"
+#include "test_runner.h"
 
 #include <algorithm>
 #include <map>
@@ -15,21 +15,21 @@
 #include "include/cef_trace.h"
 #include "include/wrapper/cef_closure_task.h"
 #include "include/wrapper/cef_stream_resource_handler.h"
-#include "tests/cefclient/browser/binding_test.h"
-#include "tests/cefclient/browser/client_handler.h"
-#include "tests/cefclient/browser/dialog_test.h"
-#include "tests/cefclient/browser/main_context.h"
-#include "tests/cefclient/browser/media_router_test.h"
-#include "tests/cefclient/browser/preferences_test.h"
-#include "tests/cefclient/browser/resource.h"
-#include "tests/cefclient/browser/response_filter_test.h"
-#include "tests/cefclient/browser/root_window_manager.h"
-#include "tests/cefclient/browser/scheme_test.h"
-#include "tests/cefclient/browser/server_test.h"
-#include "tests/cefclient/browser/urlrequest_test.h"
-#include "tests/cefclient/browser/window_test.h"
-#include "tests/shared/browser/resource_util.h"
-#include "tests/shared/common/string_util.h"
+#include "binding_test.h"
+#include "client_handler.h"
+#include "dialog_test.h"
+#include "main_context.h"
+#include "media_router_test.h"
+#include "preferences_test.h"
+#include "resource.h"
+#include "response_filter_test.h"
+#include "root_window_manager.h"
+#include "scheme_test.h"
+#include "server_test.h"
+#include "urlrequest_test.h"
+#include "window_test.h"
+#include "resource_util.h"
+#include "../common/string_util.h"
 
 namespace client {
 namespace test_runner {

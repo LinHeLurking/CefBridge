@@ -8,12 +8,26 @@ project ("CefBridge")
 # Globally set C++ standard to C++17
 set(CMAKE_CXX_STANDARD 17)
 
+set(shared_memory_src
+"${CMAKE_SOURCE_DIR}/src/shared_memory/shm_manager.h"
+"${CMAKE_SOURCE_DIR}/src/shared_memory/shm_manager.cc"
+"${CMAKE_SOURCE_DIR}/src/shared_memory/shm_obj.h"
+"${CMAKE_SOURCE_DIR}/src/shared_memory/shm_obj.cc"
+"${CMAKE_SOURCE_DIR}/src/shared_memory/shm_obj_win.h"
+"${CMAKE_SOURCE_DIR}/src/shared_memory/shm_obj_win.cc"
+)
+
+set(utility_src 
+)
+
 add_executable (cef_bridge 
 "src/main.cc"
 "src/cef_bridge/cef_bridge.h"
 "src/cef_bridge/cef_bridge.cc" 
 "src/cef_bridge/cef_bridge_win.h"
 "src/cef_bridge/cef_bridge_win.cc"
+"${shared_memory_src}"
+"${utility_src}"
 )
 
 # Enable unicode for all WIN32 API

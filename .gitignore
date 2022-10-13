@@ -7,4 +7,4 @@ cmake-build-*
 out
 CMakePresets.json
 CMakeSettings.json
-
+*.log
