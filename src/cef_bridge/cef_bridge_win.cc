@@ -19,17 +19,17 @@ int CefBridgeWin::Launch() {
   ZeroMemory(&process_info_, sizeof(process_info_));
 
   // Start the child process.
-  auto res = CreateProcess(
-      nullptr,           // No module name (use command line)
-      target_path_c_str, // Command line
-      nullptr,           // Process handle not inheritable
-      nullptr,           // Thread handle not inheritable
-      FALSE,             // Set handle inheritance to FALSE
-      0,                 // No creation flags
-      nullptr,           // Use parent's environment block
-      nullptr,           // Use parent's starting directory
-      &start_up_info_,   // Pointer to STARTUPINFO structure
-      &process_info_     // Pointer to PROCESS_INFORMATION structure
+  auto res =
+      CreateProcess(nullptr,            // No module name (use command line)
+                    target_path_c_str,  // Command line
+                    nullptr,            // Process handle not inheritable
+                    nullptr,            // Thread handle not inheritable
+                    FALSE,              // Set handle inheritance to FALSE
+                    0,                  // No creation flags
+                    nullptr,            // Use parent's environment block
+                    nullptr,            // Use parent's starting directory
+                    &start_up_info_,    // Pointer to STARTUPINFO structure
+                    &process_info_  // Pointer to PROCESS_INFORMATION structure
       );
   if (!res) {
     printf("CreateProcess failed (%ld).\n", GetLastError());
@@ -41,7 +41,7 @@ int CefBridgeWin::Launch() {
   return 0;
 }
 
-std::wstring CefBridgeWin::SearchCefClient() const {
+std::wstring CefBridgeWin::SearchCefClient() {
   TCHAR self_path_c_str[MAX_NAME_LEN];
   GetModuleFileName(nullptr, self_path_c_str, MAX_NAME_LEN);
 
@@ -61,8 +61,4 @@ std::wstring CefBridgeWin::SearchCefClient() const {
   }
   return L"";
 }
-
-CefBridgeWin::~CefBridgeWin() {
-  TerminateProcess(process_info_.hProcess, 0);
-}
-}
+}  // namespace cef_bridge

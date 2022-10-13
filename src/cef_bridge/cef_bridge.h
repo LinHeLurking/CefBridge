@@ -5,9 +5,9 @@
 
 namespace cef_bridge {
 class CefBridge {
-public:
+ public:
   class Delegate {
-  public:
+   public:
     virtual int Launch() = 0;
 
     virtual ~Delegate() = default;
@@ -16,12 +16,10 @@ public:
   CefBridge();
   ~CefBridge();
 
-  int Launch() const {
-    return bridge_delegate_->Launch();
-  }
+  [[nodiscard]] int Launch() const { return bridge_delegate_->Launch(); }
 
-private:
+ private:
   std::unique_ptr<Delegate> bridge_delegate_;
 };
-}
+}  // namespace cef_bridge
 #endif  // !CEF_BRIDGE_CEF_LAUNCHER_LAUNCHER_H
