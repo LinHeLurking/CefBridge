@@ -43,6 +43,8 @@ set(CEFCLIENT_BROWSER_BROWSER_SRCS
   browser/osr_dragdrop_events.h
   browser/osr_renderer.cc
   browser/osr_renderer.h
+  browser/osr_shm_renderer.cc
+  browser/osr_shm_renderer.h
   browser/osr_renderer_settings.h
   browser/preferences_test.cc
   browser/preferences_test.h
@@ -291,6 +293,8 @@ set(CEFCLIENT_WINDOWS_BROWSER_SRCS
   browser/temp_window_win.h
   browser/window_test_runner_win.cc
   browser/window_test_runner_win.h
+  browser/osr_shm_render_handler_win.cc
+  browser/osr_shm_render_handler_win.h
   )
 source_group(cefclient\\\\browser FILES ${CEFCLIENT_WINDOWS_BROWSER_SRCS})
 

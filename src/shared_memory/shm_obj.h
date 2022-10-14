@@ -31,14 +31,28 @@ class ShmObj {
      *
      * @return size_t
      */
-    virtual size_t GetSize() const = 0;
+    virtual size_t GetByteSize() const = 0;
+    /**
+     * @brief Get the last dimension of 2d shared memory
+     * 
+     * @return size_t 
+     */
+    virtual size_t GetXSize() const = 0;
+    /**
+     * @brief Get the first dimension of 2d shared memory
+     * 
+     * @return size_t 
+     */
+    virtual size_t GetYSize() const = 0;
     virtual ~Delegate() {}
   };
-  ShmObj(int key, size_t size);
+  ShmObj(int key, size_t sz_x, size_t sz_y, size_t sz_elem);
   virtual ~ShmObj(){};
 
   int GetKey() const { return shm_obj_d_->GetKey(); }
-  size_t GetSize() const { return shm_obj_d_->GetSize(); }
+  size_t GetByteSize() const { return shm_obj_d_->GetByteSize(); }
+  size_t GetXSize() const { return shm_obj_d_->GetXSize(); }
+  size_t GetYSize() const { return shm_obj_d_->GetYSize(); }
   int8_t *GetBuf() const { return shm_obj_d_->GetBuf(); }
 
  private:

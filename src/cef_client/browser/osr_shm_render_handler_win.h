@@ -1,20 +1,17 @@
-// Copyright 2018 The Chromium Embedded Framework Authors. All rights
-// reserved. Use of this source code is governed by a BSD-style license that
-// can be found in the LICENSE file.
+#ifndef CEF_BRIDGE_OSR_RENDER_HANDLER_SHM_WIN_H
+#define CEF_BRIDGE_OSR_RENDER_HANDLER_SHM_WIN_H
 
-#ifndef CEF_TESTS_CEFCLIENT_BROWSER_OSR_RENDER_HANDLER_WIN_GL_H_
-#define CEF_TESTS_CEFCLIENT_BROWSER_OSR_RENDER_HANDLER_WIN_GL_H_
-#pragma once
+#include <memory>
 
 #include "osr_render_handler_win.h"
-#include "osr_renderer.h"
+#include "osr_shm_renderer.h"
+
 
 namespace client {
-
-class OsrRenderHandlerWinGL : public OsrRenderHandlerWin {
+class OsrShmRenderHandlerWin : public OsrRenderHandlerWin {
  public:
-  OsrRenderHandlerWinGL(const OsrRendererSettings& settings, HWND hwnd);
-  virtual ~OsrRenderHandlerWinGL();
+  OsrShmRenderHandlerWin(const OsrRendererSettings& settings, HWND hwnd);
+  virtual ~OsrShmRenderHandlerWin();
 
   // Must be called immediately after object creation.
   void Initialize(CefRefPtr<CefBrowser> browser);
@@ -37,19 +34,9 @@ class OsrRenderHandlerWinGL : public OsrRenderHandlerWin {
 
  private:
   void Render() override;
-
-  void EnableGL();
-  void DisableGL();
-
-  // The below members are only accessed on the UI thread.
-  OsrRenderer renderer_;
-  HDC hdc_;
-  HGLRC hrc_;
   bool painting_popup_;
-
-  DISALLOW_COPY_AND_ASSIGN(OsrRenderHandlerWinGL);
+  OsrShmRenderer renderer_;
 };
-
 }  // namespace client
 
-#endif  // CEF_TESTS_CEFCLIENT_BROWSER_OSR_RENDER_HANDLER_WIN_GL_H_
+#endif

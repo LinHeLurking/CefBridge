@@ -7,7 +7,6 @@
 #include <stdint.h>
 #include <vcruntime_string.h>
 
-#include "../../shared_memory/shm_manager.h"
 #include "include/base/cef_callback.h"
 #include "include/wrapper/cef_closure_task.h"
 #include "include/wrapper/cef_helpers.h"
@@ -47,8 +46,7 @@ OsrRenderHandlerWinGL::OsrRenderHandlerWinGL(
       renderer_(settings),
       hdc_(nullptr),
       hrc_(nullptr),
-      painting_popup_(false),
-      shm_mgr_(new ::shared_memory::ShmManager) {}
+      painting_popup_(false) {}
 
 void OsrRenderHandlerWinGL::Initialize(CefRefPtr<CefBrowser> browser) {
   CEF_REQUIRE_UI_THREAD();
@@ -113,12 +111,6 @@ void OsrRenderHandlerWinGL::OnPaint(
     const CefRenderHandler::RectList& dirtyRects, const void* buffer, int width,
     int height) {
   CEF_REQUIRE_UI_THREAD();
-
-  int key = browser->GetIdentifier();
-  int size = width * height * 4;
-  auto shm = shm_mgr_->GetOrCreateShm(key, size);
-  int8_t* shm_buf = shm->GetBuf();
-  memcpy(shm_buf, buffer, size);
 
   if (painting_popup_) {
     renderer_.OnPaint(browser, type, dirtyRects, buffer, width, height);
