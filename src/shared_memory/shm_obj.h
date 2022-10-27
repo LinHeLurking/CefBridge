@@ -17,8 +17,8 @@ class ShmObj {
      *
      * @return int
      */
-
     virtual int GetKey() const = 0;
+
     /**
      * @brief Get the read/write buffer of shared memory
      *
@@ -32,12 +32,14 @@ class ShmObj {
      * @return size_t
      */
     virtual size_t GetByteSize() const = 0;
+    
     /**
      * @brief Get the last dimension of 2d shared memory
      * 
      * @return size_t 
      */
     virtual size_t GetXSize() const = 0;
+
     /**
      * @brief Get the first dimension of 2d shared memory
      * 
