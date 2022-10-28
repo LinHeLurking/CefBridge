@@ -7,4 +7,5 @@ cmake-build-*
 out
 CMakePresets.json
 CMakeSettings.json
+env.ps1
 *.log

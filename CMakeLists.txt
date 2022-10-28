@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : CMake project for CefBridge, include source and define
 # project specific logic here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.12)
 
 project ("CefBridge")
 
@@ -35,6 +35,11 @@ set_property(GLOBAL PROPERTY OS_FOLDERS ON)
 # CEF detection
 #
 
+if(DEFINED ENV{CEF_ROOT})
+  # message(STATUS "Setting CEF_ROOT as $ENV{CEF_ROOT}")
+  set(CEF_ROOT $ENV{CEF_ROOT})
+endif()
+
 # CEF_ROOT is set with IDE config
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CEF_ROOT}/cmake")
 
@@ -55,4 +60,6 @@ add_dependencies(cef_launcher cefclient)
 
 # Display configuration settings.
 # PRINT_CEF_CONFIG()
+
+add_executable(test_reader src/test_reader/reader.cc)
 
