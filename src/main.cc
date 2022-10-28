@@ -2,8 +2,7 @@
 
 #include "cef_launcher/launcher.h"
 
-
 int main() {
-  cef_bridge::CefLauncher const bridge;
-  return bridge.Launch();
+  cef_bridge::CefLauncher const launcher;
+  return launcher.Launch();
 }

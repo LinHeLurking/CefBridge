@@ -6,17 +6,17 @@
 
 #include <memory>
 
-#include "include/cef_command_line.h"
-#include "include/cef_sandbox_win.h"
+#include "browser/client_app_browser.h"
 #include "browser/main_context_impl.h"
+#include "browser/main_message_loop_external_pump.h"
 #include "browser/main_message_loop_multithreaded_win.h"
+#include "browser/main_message_loop_std.h"
 #include "browser/root_window_manager.h"
 #include "browser/test_runner.h"
-#include "browser/client_app_browser.h"
-#include "browser/main_message_loop_external_pump.h"
-#include "browser/main_message_loop_std.h"
 #include "common/client_app_other.h"
 #include "common/client_switches.h"
+#include "include/cef_command_line.h"
+#include "include/cef_sandbox_win.h"
 #include "renderer/client_app_renderer.h"
 
 // When generating projects with CMake the CEF_USE_SANDBOX value will be defined
@@ -65,8 +65,7 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
 
   // Execute the secondary process, if any.
   int exit_code = CefExecuteProcess(main_args, app, sandbox_info);
-  if (exit_code >= 0)
-    return exit_code;
+  if (exit_code >= 0) return exit_code;
 
   // Create the main context object.
   auto context = std::make_unique<MainContextImpl>(command_line, true);
@@ -102,12 +101,16 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
       !command_line->HasSwitch(switches::kHideControls);
   window_config->with_osr =
       settings.windowless_rendering_enabled ? true : false;
+  window_config->source_bounds.Set(0, 0, 800, 600);
 
   // Set |initially_hidden| to hide the window.
   // window_config->initially_hidden = true;
 
   // Create the first window.
-  context->GetRootWindowManager()->CreateRootWindow(std::move(window_config));
+  auto window = context->GetRootWindowManager()->CreateRootWindow(
+      std::move(window_config));
+
+  /* window->SetBounds(0, 0, 800, 600); */
 
   // Run the message loop. This will block until Quit() is called by the
   // RootWindowManager after all windows have been destroyed.
@@ -123,14 +126,12 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
   return result;
 }
 
-} // namespace
-} // namespace client
+}  // namespace
+}  // namespace client
 
 // Program entry point function.
-int APIENTRY wWinMain(HINSTANCE hInstance,
-                      HINSTANCE hPrevInstance,
-                      LPTSTR lpCmdLine,
-                      int nCmdShow) {
+int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+                      LPTSTR lpCmdLine, int nCmdShow) {
   UNREFERENCED_PARAMETER(hPrevInstance);
   UNREFERENCED_PARAMETER(lpCmdLine);
   return client::RunMain(hInstance, nCmdShow);

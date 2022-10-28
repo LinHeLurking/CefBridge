@@ -1124,35 +1124,19 @@ CefBrowserHost::DragOperationsMask OsrWindowWin::OnDrop(
 void OsrWindowWin::EnsureRenderHandler() {
   CEF_REQUIRE_UI_THREAD();
   if (!render_handler_) {
-    // if (settings_.shared_texture_enabled) {
-    //   // Try to initialize D3D11 rendering.
-    //   auto render_handler = new OsrRenderHandlerWinD3D11(settings_, hwnd_);
-    //   if (render_handler->Initialize(browser_,
-    //                                  client_rect_.right - client_rect_.left,
-    //                                  client_rect_.bottom - client_rect_.top))
-    //                                  {
-    //     render_handler_.reset(render_handler);
-    //     LOG(INFO) << "Created D3D11 renderer.\n";
-    //   } else {
-    //     LOG(ERROR) << "Failed to initialize D3D11 rendering.";
-    //     delete render_handler;
-    //   }
-    // }
-
-    // // Fall back to GL rendering.
-    // if (!render_handler_) {
-    //   auto render_handler = new OsrRenderHandlerWinGL(settings_, hwnd_);
-    //   render_handler->Initialize(browser_);
-    //   render_handler_.reset(render_handler);
-    //   LOG(INFO) << "Created OpenGL renderer.\n";
-    // }
-
     // Create shared memory renderer
     // TODO:
     auto render_handler = new OsrShmRenderHandlerWin(settings_, hwnd_);
     render_handler->Initialize(browser_);
     render_handler_.reset(render_handler);
     LOG(INFO) << "Created Shm Renderer.\n";
+  }
+  // Fall back to GL rendering.
+  if (!render_handler_) {
+    auto render_handler = new OsrRenderHandlerWinGL(settings_, hwnd_);
+    render_handler->Initialize(browser_);
+    render_handler_.reset(render_handler);
+    LOG(INFO) << "Created OpenGL renderer.\n";
   }
 }
 

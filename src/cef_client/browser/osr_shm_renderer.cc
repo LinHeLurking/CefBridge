@@ -111,11 +111,14 @@ void OsrShmRenderer::OnPaint(CefRefPtr<CefBrowser> browser,
     if (x + w > view_width_) w -= x + w - view_width_;
     if (y + h > view_height_) h -= y + h - view_height_;
 
-    // Update hte popup rectangle
+    // Update the popup rectangle
+    /* int8_t* shared_buf = */
+    /*     shm_mgr_ */
+    /*         .GetOrCreateShm(browser->GetIdentifier(), view_width_,
+     * view_height_) */
+    /*         ->GetBuf(); */
     int8_t* shared_buf =
-        shm_mgr_
-            .GetOrCreateShm(browser->GetIdentifier(), view_width_, view_height_)
-            ->GetBuf();
+        shm_mgr_.GetOrCreateShm(0, view_width_, view_height_)->GetBuf();
     for (int row = skip_rows; row < skip_rows + h; ++row) {
       std::memcpy(
           shared_buf + row * width + skip_pixels,

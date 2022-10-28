@@ -58,8 +58,13 @@ add_subdirectory(src/cef_client)
 
 add_dependencies(cef_launcher cefclient)
 
-# Display configuration settings.
-# PRINT_CEF_CONFIG()
+find_package(OpenGL REQUIRED)
 
-add_executable(test_reader src/test_reader/reader.cc)
+set(test_reader_src
+"src/test_reader/reader.cc"
+"src/test_reader/renderer.h"
+"src/test_reader/renderer.cc"
+)
+add_executable(test_reader WIN32 ${test_reader_src} ${shared_memory_src})
+target_link_libraries(test_reader OpenGL::GL)
 
